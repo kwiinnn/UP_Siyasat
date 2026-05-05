@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model
+{
+    protected $table = 'category';
+    public $timestamps = false;
+
+    protected $fillable = [
+        'category_name',
+        'description',
+    ];
+
+    public function researchDocuments()
+    {
+        return $this->belongsToMany(
+            ResearchDocument::class,
+            'document_category',
+            'category_id',
+            'document_id'
+        );
+    }
+}
