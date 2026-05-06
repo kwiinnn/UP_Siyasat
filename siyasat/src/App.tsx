@@ -25,13 +25,9 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 relative flex flex-col">
-      {/* Header stays absolute at the very top */}
       <Header onNavigate={handleNavigate} currentView={currentView}/>
 
-      {/* Full width content area wrapper */}
       <div className="flex-1 w-full">
-        
-        {/* Home Page handles its own full-width hero section */}
         {currentView === 'home' && (
           <HomePage 
             recentTheses={mockTheses} 
@@ -41,10 +37,10 @@ export default function App() {
           />
         )}
 
-        {/* Sub-pages are constrained with padding so they don't hide under the header */}
+        {/* Changed px-8 to px-5 md:px-8 for better mobile spacing */}
         {currentView !== 'home' && (
-          <main className="max-w-7xl mx-auto px-8 pt-32 pb-12 flex flex-col lg:flex-row gap-12 w-full">
-            <div className="flex-1">
+          <main className="max-w-7xl mx-auto px-5 md:px-8 pt-24 md:pt-32 pb-12 flex flex-col lg:flex-row gap-12 w-full">
+            <div className="flex-1 w-full overflow-hidden">
               {currentView === 'list' && <ListPage theses={mockTheses} onRead={handleRead} />}
               {currentView === 'detail' && <DetailPage thesis={selectedThesis} />}
             </div>
