@@ -12,8 +12,12 @@ class DocumentController extends Controller
     public function index(Request $request)
     {
         $query = ResearchDocument::with([
-            'authors', 'categories', 'department', 'degree', 'uploader'
-        ]);
+                'authors',
+                'categories',
+                'department',
+                'degree',
+                'degree.department',
+            ]);
 
         if ($request->filled('type'))
             $query->where('document_type', $request->type);
@@ -53,8 +57,12 @@ class DocumentController extends Controller
     public function show($id)
     {
         $doc = ResearchDocument::with([
-            'authors', 'categories', 'department', 'degree', 'uploader'
-        ])->findOrFail($id);
+            'authors',
+            'categories',
+            'department',
+            'degree',
+            'degree.department',
+        ])->where('document_id', $id)->firstOrFail();
 
         return response()->json($doc);
     }
