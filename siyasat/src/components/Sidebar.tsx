@@ -28,7 +28,7 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
           </li>
           <li>
             <button className="hover:text-[#7A1114] hover:translate-x-1 transition-all text-left w-full">
-              Capstones
+              Postgraduate Theses
             </button>
           </li>
         </ul>
