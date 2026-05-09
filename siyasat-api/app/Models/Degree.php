@@ -8,6 +8,8 @@ class Degree extends Model
 {
     protected $table = 'degree';
     protected $primaryKey = 'degree_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
     public $timestamps = false;
 
     protected $fillable = [
