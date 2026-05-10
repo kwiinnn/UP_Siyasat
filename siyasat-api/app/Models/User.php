@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Filament\Models\Contracts\HasName;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens, Notifiable;
 
-    protected $table = 'user';
+    protected $table      = 'user';
     protected $primaryKey = 'user_id';
+    public $incrementing  = true;
+    protected $keyType    = 'int';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = null;
@@ -26,20 +31,42 @@ class User extends Authenticatable
         'department_id',
     ];
 
-    protected $hidden = [
-        'password_hash',
-    ];
+    protected $hidden = ['password_hash'];
 
-    // Tell Laravel which column is the password
-    public function getAuthPassword()
+    public function getFilamentEmail(): string
+    {
+        return $this->email_address;
+    }
+
+    public static function getFilamentEmailField(): string  
+    {
+        return 'email_address';
+    }
+
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function getAuthPassword(): string
     {
         return $this->password_hash;
     }
 
-    // Tell Laravel which column is the email
-    public function getEmailForPasswordReset()
+    public function getAuthIdentifierName(): string
+    {
+        return 'email_address';
+    }
+
+    public function getEmailForPasswordReset(): string
     {
         return $this->email_address;
+    }
+
+    // Only ColSec_Admin can access the Filament panel
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->account_role === 'Colsec_Admin';
     }
 
     public function isAdmin(): bool
@@ -54,6 +81,6 @@ class User extends Authenticatable
 
     public function uploadedDocuments()
     {
-        return $this->hasMany(ResearchDocument::class, 'uploader_id');
+        return $this->hasMany(ResearchDocument::class, 'uploader_id', 'user_id');
     }
 }

@@ -3,15 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ResearchDocument extends Model
 {
-    protected $table = 'research_document';
+    use SoftDeletes;
+
+    protected $table      = 'research_document';
     protected $primaryKey = 'document_id';
-    public $incrementing = true;
-    protected $keyType = 'int';
+    public $incrementing  = true;
+    protected $keyType    = 'int';
+
     const CREATED_AT = 'upload_date';
     const UPDATED_AT = 'updated_at';
+
+    // Add deleted_at to dates
+    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'title',
@@ -36,7 +43,7 @@ class ResearchDocument extends Model
 
     public function uploader()
     {
-        return $this->belongsTo(User::class, 'uploader_id');
+        return $this->belongsTo(User::class, 'uploader_id', 'user_id');
     }
 
     public function authors()

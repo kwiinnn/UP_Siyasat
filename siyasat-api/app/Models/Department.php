@@ -30,6 +30,6 @@ class Department extends Model
 
     public function researchDocuments()
     {
-        return $this->hasMany(ResearchDocument::class);
+        return $this->hasMany(ResearchDocument::class, 'department_id', 'department_id');
     }
 }
