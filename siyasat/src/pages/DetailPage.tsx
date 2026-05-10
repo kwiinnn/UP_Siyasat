@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ExternalLink } from 'lucide-react';
 import { documentsApi } from '../services/api';
-import { formatAuthors, formatCollege } from '../utils/formatters';
-import { formatDocumentType } from '../utils/formatters';
+import { formatAuthors, formatCollege, formatDocumentType } from '../utils/formatters';
 import type { ResearchDocument } from '../types';
 
-interface DetailPageProps {
-  documentId: number;
-}
-
-export default function DetailPage({ documentId }: DetailPageProps) {
+export default function DetailPage() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [doc, setDoc] = useState<ResearchDocument | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!id) return;
     setLoading(true);
     setError(null);
 
-    documentsApi.getOne(documentId)
+    documentsApi.getOne(Number(id))
       .then(data => setDoc(data))
       .catch(() => setError('Document not found.'))
       .finally(() => setLoading(false));
-  }, [documentId]);
+  }, [id]);
 
   if (loading) return (
     <div className="space-y-4 animate-pulse w-full">
@@ -34,23 +33,23 @@ export default function DetailPage({ documentId }: DetailPageProps) {
   );
 
   if (error || !doc) return (
-    <div className="text-sm text-gray-500">{error ?? 'Document not found.'}</div>
+    <div className="text-sm text-gray-500">
+      {error ?? 'Document not found.'}
+      <button
+        onClick={() => navigate(-1)}
+        className="ml-3 text-[#7A1114] hover:underline"
+      >
+        Go back
+      </button>
+    </div>
   );
 
-  // e.g. "Undergraduate Theses"
-  const typeLabel = formatDocumentType(doc.document_type);
-
-  // e.g. "DMPCS" from department_code
-  const deptCode = doc.department?.department_code ?? '—';
-
-  // e.g. "College of Sciences and Mathematics"
-  const collegeName = formatCollege(doc.department?.college_name);
-
-  // e.g. "Bachelor of Science in Computer Science"
-  const degreeName = doc.degree?.degree_name ?? '—';
-
-  // e.g. "May 2025"
-  const dateDisplay = (() => {
+  const typeLabel    = formatDocumentType(doc.document_type);
+  const typeRoute    = doc.document_type.toLowerCase();
+  const deptCode     = doc.department?.department_code ?? '—';
+  const collegeName  = formatCollege(doc.department?.college_name);
+  const degreeName   = doc.degree?.degree_name ?? '—';
+  const dateDisplay  = (() => {
     const date = new Date(doc.upload_date);
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   })();
@@ -59,10 +58,20 @@ export default function DetailPage({ documentId }: DetailPageProps) {
     <div className="animate-in fade-in duration-300 w-full">
 
       {/* Breadcrumb */}
-      <div className="text-xs text-gray-500 mb-6 flex flex-wrap gap-1">
-        <span>Home</span>
+      <div className="text-xs text-gray-500 mb-6 flex flex-wrap gap-1 items-center">
+        <span
+          onClick={() => navigate('/')}
+          className="hover:text-[#7A1114] cursor-pointer"
+        >
+          Home
+        </span>
         <span>&gt;</span>
-        <span>{typeLabel}</span>
+        <span
+          onClick={() => navigate(`/${typeRoute}`)}
+          className="hover:text-[#7A1114] cursor-pointer"
+        >
+          {typeLabel}
+        </span>
         <span>&gt;</span>
         <span>{doc.document_id}</span>
       </div>
@@ -96,9 +105,8 @@ export default function DetailPage({ documentId }: DetailPageProps) {
         )}
       </div>
 
-      {/* Document metadata */}
+      {/* Metadata */}
       <div className="space-y-5 text-sm">
-
         <div>
           <h4 className="font-bold text-gray-900 text-xs mb-1">Date</h4>
           <p className="text-gray-700 text-xs">{dateDisplay}</p>
@@ -143,7 +151,6 @@ export default function DetailPage({ documentId }: DetailPageProps) {
             {doc.abstract}
           </p>
         </div>
-
       </div>
     </div>
   );
