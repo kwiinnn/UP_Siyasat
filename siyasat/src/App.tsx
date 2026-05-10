@@ -1,55 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
 import DetailPage from './pages/DetailPage';
-import type { ViewState } from './types';
-import { mockTheses } from './data/mockData';
+import SearchPage from './pages/SearchPage';
+
+function WithSidebar({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="max-w-7xl mx-auto px-5 md:px-8 pt-24 md:pt-32 pb-12 flex flex-col lg:flex-row gap-12 w-full">
+      <div className="flex-1 w-full overflow-hidden">
+        {children}
+      </div>
+      <div className="w-full lg:w-72">
+        <Sidebar />
+      </div>
+    </main>
+  );
+}
 
 export default function App() {
-  const [currentView, setCurrentView] = useState<ViewState>('home');
-  const [selectedThesisId, setSelectedThesisId] = useState<string | null>(null);
-
-  const handleNavigate = (view: ViewState) => {
-    setCurrentView(view);
-    if (view !== 'detail') setSelectedThesisId(null);
-  };
-
-  const handleRead = (id: string) => {
-    setSelectedThesisId(id);
-    setCurrentView('detail');
-  };
-
-  const selectedThesis = mockTheses.find(t => t.id === selectedThesisId);
-
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 relative flex flex-col">
-      <Header onNavigate={handleNavigate} currentView={currentView}/>
+      <Header />
 
       <div className="flex-1 w-full">
-        {currentView === 'home' && (
-          <HomePage 
-            recentTheses={mockTheses} 
-            onViewAll={() => handleNavigate('list')} 
-            onNavigate={setCurrentView} 
-            onRead={handleRead}
-          />
-        )}
+        <Routes>
+          <Route path="/" element={<HomePage />} />
 
-        {/* Changed px-8 to px-5 md:px-8 for better mobile spacing */}
-        {currentView !== 'home' && (
-          <main className="max-w-7xl mx-auto px-5 md:px-8 pt-24 md:pt-32 pb-12 flex flex-col lg:flex-row gap-12 w-full">
-            <div className="flex-1 w-full overflow-hidden">
-              {currentView === 'list' && <ListPage theses={mockTheses} onRead={handleRead} />}
-              {currentView === 'detail' && <DetailPage thesis={selectedThesis} />}
-            </div>
-            
-            <div className="w-full lg:w-72">
-              <Sidebar onNavigate={handleNavigate} />
-            </div>
-          </main>
-        )}
+          <Route path="/undergraduate" element={
+            <WithSidebar>
+              <ListPage type="Undergraduate" />
+            </WithSidebar>
+          } />
+
+          <Route path="/postgraduate" element={
+            <WithSidebar>
+              <ListPage type="Postgraduate" />
+            </WithSidebar>
+          } />
+
+          <Route path="/faculty" element={
+            <WithSidebar>
+              <ListPage type="Faculty" />
+            </WithSidebar>
+          } />
+
+          <Route path="/document/:id" element={
+            <WithSidebar>
+              <DetailPage />
+            </WithSidebar>
+          } />
+
+          <Route path="*" element={
+            <WithSidebar>
+              <div className="text-sm text-gray-500">Page not found.</div>
+            </WithSidebar>
+          } />
+
+          <Route path="/search" element={
+            <WithSidebar>
+              <SearchPage />
+            </WithSidebar>
+          } />
+        </Routes>
       </div>
     </div>
   );

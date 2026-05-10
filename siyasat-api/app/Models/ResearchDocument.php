@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ResearchDocument extends Model
 {
     protected $table = 'research_document';
+    protected $primaryKey = 'document_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
     const CREATED_AT = 'upload_date';
     const UPDATED_AT = 'updated_at';
 
@@ -23,12 +26,12 @@ class ResearchDocument extends Model
 
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'department_id', 'department_id');
     }
 
     public function degree()
     {
-        return $this->belongsTo(Degree::class);
+        return $this->belongsTo(Degree::class, 'degree_id', 'degree_id');
     }
 
     public function uploader()

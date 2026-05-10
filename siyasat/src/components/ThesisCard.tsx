@@ -1,8 +1,9 @@
 import React from 'react';
-import type { Thesis } from '../types';
+import type { ResearchDocument } from '../types';
+import { formatAuthors } from '../utils/formatters';
 
 interface ThesisCardProps {
-  thesis: Thesis;
+  thesis: ResearchDocument;
   onClick?: () => void;
 }
 
@@ -14,8 +15,8 @@ export default function ThesisCard({ thesis, onClick }: ThesisCardProps) {
         ${onClick ? 'cursor-pointer hover:shadow-md hover:border-[#7A1114]/30' : 'shadow-sm hover:shadow-md'}`}
     >
       <h4 className="font-bold text-gray-800 text-sm mb-1">{thesis.title}</h4>
-      <p className="text-xs text-gray-500">
-        {thesis.authors} ({thesis.year}) | {thesis.department}
+        <p className="text-xs text-gray-500">
+        {formatAuthors(thesis.authors)} ({thesis.publication_year}) | {thesis.department?.department_code ?? '—'}
       </p>
     </div>
   );

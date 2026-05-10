@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     protected $table = 'department';
+    protected $primaryKey = 'department_id';
+    public $incrementing = true;
+    protected $keyType = 'int';
     public $timestamps = false;
 
     protected $fillable = [
