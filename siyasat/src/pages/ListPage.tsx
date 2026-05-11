@@ -101,6 +101,8 @@ export default function ListPage({ type }: ListPageProps) {
   return (
     <div className="animate-in fade-in duration-500 w-full">
 
+      
+
       {/* Breadcrumb */}
       <div className="text-sm text-gray-500 mb-8 font-medium">
         <span
