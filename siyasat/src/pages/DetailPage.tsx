@@ -45,7 +45,14 @@ export default function DetailPage() {
   );
 
   const typeLabel    = formatDocumentType(doc.document_type);
-  const typeRoute    = doc.document_type.toLowerCase();
+  const typeRoute = (() => {
+  const map: Record<string, string> = {
+      Undergraduate: 'undergraduate',
+      Postgraduate:  'postgraduate',
+      Faculty:       'faculty',
+    };
+    return map[doc.document_type] ?? doc.document_type.toLowerCase();
+  })();
   const deptCode     = doc.department?.department_code ?? '—';
   const collegeName  = formatCollege(doc.department?.college_name);
   const degreeName   = doc.degree?.degree_name ?? '—';
@@ -56,6 +63,13 @@ export default function DetailPage() {
 
   return (
     <div className="animate-in fade-in duration-300 w-full">
+
+      <img
+        src="/detail-banner.png"
+        alt="UP Siyasat Banner"
+        className="w-full object-cover mb-8 "
+        style={{ width: 'calc(100% + 2.5rem)' }}
+      />
 
       {/* Breadcrumb */}
       <div className="text-xs text-gray-500 mb-6 flex flex-wrap gap-1 items-center">
@@ -147,7 +161,7 @@ export default function DetailPage() {
 
         <div className="pt-2">
           <h4 className="font-bold text-gray-900 text-xs mb-2">Abstract</h4>
-          <p className="text-gray-700 text-xs leading-relaxed text-justify">
+          <p className="text-gray-700 text-xs md:text-sm leading-relaxed text-justify">
             {doc.abstract}
           </p>
         </div>
