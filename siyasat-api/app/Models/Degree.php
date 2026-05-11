@@ -26,6 +26,6 @@ class Degree extends Model
 
     public function researchDocuments()
     {
-        return $this->hasMany(ResearchDocument::class);
+        return $this->hasMany(ResearchDocument::class, 'degree_id', 'degree_id');
     }
 }

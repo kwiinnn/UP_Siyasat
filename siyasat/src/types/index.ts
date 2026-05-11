@@ -86,7 +86,7 @@ export const ROUTE_TO_TYPE: Record<string, DocumentType> = {
 export const TYPE_LABELS: Record<DocumentType, string> = {
   Undergraduate: 'Undergraduate Theses',
   Postgraduate:  'Postgraduate Theses',
-  Faculty:       'Faculty Theses',
+  Faculty:       'Faculty Research',
 };
 
 // Full college name display labels

@@ -34,7 +34,7 @@ export default function Sidebar() {
               to="/faculty"
               className="hover:text-[#7A1114] hover:translate-x-1 transition-all block"
             >
-              Faculty Theses
+              Faculty Research
             </Link>
           </li>
           <li>

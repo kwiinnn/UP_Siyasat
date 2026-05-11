@@ -39,9 +39,9 @@ export default function Header() {
           <Link to="/" className="hover:opacity-75 transition-opacity">
             Home
           </Link>
-          <button className="hover:opacity-75 transition-opacity">
+          <Link to="/about" className="hover:opacity-75 transition-opacity">
             About
-          </button>
+          </Link>
           <Link to="/undergraduate" className="flex items-center gap-2 hover:opacity-75 transition-opacity">
             <Search size={16} /> Search
           </Link>
@@ -66,9 +66,15 @@ export default function Header() {
           >
             Home
           </Link>
-          <button className="py-3 border-b border-gray-100 text-left hover:text-[#4A0A0C]">
+
+          <Link
+            to="/about"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="py-3 border-b border-gray-100 text-left hover:text-[#4A0A0C]"
+          >
             About
-          </button>
+          </Link>
+
           <Link
             to="/undergraduate"
             onClick={() => setIsMobileMenuOpen(false)}
