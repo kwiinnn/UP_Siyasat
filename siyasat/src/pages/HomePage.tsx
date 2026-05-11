@@ -45,7 +45,7 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 w-full h-6 md:h-8 bg-gradient-to-r from-[#1A0305] via-[#4A0A0C] to-[#7A1114] z-40 shadow-inner" />
+        <div className="absolute bottom-0 left-0 w-full h-6 md:h-6 bg-gradient-to-r from-[#1A0305] via-[#4A0A0C] to-[#7A1114] z-40 shadow-inner" />
       </div>
 
       {/* Content */}
