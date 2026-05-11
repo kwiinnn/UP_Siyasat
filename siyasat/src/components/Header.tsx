@@ -35,7 +35,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow-md">
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium drop-shadow-sm">
           <Link to="/" className="hover:opacity-75 transition-opacity">
             Home
           </Link>
