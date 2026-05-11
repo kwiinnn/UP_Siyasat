@@ -24,7 +24,7 @@ export default function Sidebar() {
           <li>
             <Link
               to="/undergraduate"
-              className="hover:text-[#7A1114] hover:translate-x-1 transition-all block font-medium"
+              className="hover:text-[#7A1114] hover:translate-x-1 transition-all block"
             >
               Undergraduate Theses
             </Link>
