@@ -12,11 +12,11 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    documentsApi.getAll()
-      .then(data => setRecentDocs(data.slice(0, 5)))
-      .catch(() => setError('Failed to load recent documents.'))
-      .finally(() => setLoading(false));
-  }, []);
+      documentsApi.getAll({ type: 'Undergraduate' })
+        .then(data => setRecentDocs(data.slice(0, 5)))
+        .catch(() => setError('Failed to load recent documents.'))
+        .finally(() => setLoading(false));
+    }, []);
 
   return (
     <div className="w-full">
@@ -52,7 +52,7 @@ export default function HomePage() {
       <div className="max-w-7xl mx-auto px-5 md:px-8 pt-12 md:pt-16 pb-20 grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-16 relative z-30 bg-white w-full">
         <div className="lg:col-span-2">
           <h3 className="text-[#115740] font-optima font-bold text-xl mb-6">
-            RECENTLY ADDED
+            RECENTLY ADDED — UNDERGRADUATE THESES
           </h3>
 
           {loading && (
