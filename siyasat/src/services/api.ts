@@ -12,8 +12,13 @@ import type {
 } from '../types';
 
 // ── Axios instance ────────────────────────────────────────
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://http://13.229.109.174/api/api',
+  baseURL: 'http://localhost:8000/api',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept':       'application/json',
+  },
 });
 
 // Automatically attach token to every request if one exists
