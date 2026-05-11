@@ -15,7 +15,7 @@ const developers = [
   {
     id: 2,
     name: 'Charles O. Solomon',
-    photo: '/dev2.png',
+    photo: '/selrahc_siyasat.png',
     linkedin: 'https://www.linkedin.com/in/charles-solomon-34aa1b2a1/',
     email: 'solomon23charles@gmail.com',
   },
