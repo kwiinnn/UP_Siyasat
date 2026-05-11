@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
 import DetailPage from './pages/DetailPage';
 import SearchPage from './pages/SearchPage';
+import AboutPage from './pages/AboutPage';
 
 function WithSidebar({ children }: { children: React.ReactNode }) {
   return (
@@ -28,6 +29,8 @@ export default function App() {
       <div className="flex-1 w-full">
         <Routes>
           <Route path="/" element={<HomePage />} />
+
+          <Route path="/about" element={<AboutPage />} />
 
           <Route path="/undergraduate" element={
             <WithSidebar>
