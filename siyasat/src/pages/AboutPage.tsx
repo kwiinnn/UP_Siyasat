@@ -22,9 +22,9 @@ const developers = [
   {
     id: 3,
     name: 'Yuji B. Azuhata',
-    photo: '/dev3.png',
-    linkedin: 'https://linkedin.com/in/developer-three',
-    email: 'developer3@up.edu.ph',
+    photo: '/yuji_siyasat.png',
+    linkedin: 'https://www.linkedin.com/in/yujiazuhata/',
+    email: 'yujiazuhata1@gmail.com',
   },
 ];
 
