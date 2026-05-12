@@ -127,7 +127,7 @@ export default function ListPage({ type }: ListPageProps) {
           </div>
 
           {/* College dropdown */}
-          <div className="relative" ref={collegeRef}>
+          <div className="relative w-full sm:w-auto" ref={collegeRef}>
             <button
               onClick={() => { setCollegeOpen(o => !o); setYearOpen(false); }}
               className={`flex items-center justify-between w-full sm:w-44 px-4 py-2 text-sm border rounded-md bg-white hover:bg-gray-50 transition-all shadow-sm gap-2
@@ -143,7 +143,7 @@ export default function ListPage({ type }: ListPageProps) {
             </button>
 
             {collegeOpen && (
-              <div className="absolute right-0 mt-1 w-72 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden">
+              <div className="absolute z-50 mt-1 w-full sm:w-72 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden left-0 sm:left-auto sm:right-0">
                 <button
                   onClick={() => { setSelectedCollege(''); setCollegeOpen(false); }}
                   className="w-full text-left px-4 py-2.5 text-sm text-gray-500 hover:bg-gray-50 border-b border-gray-100"
@@ -166,7 +166,7 @@ export default function ListPage({ type }: ListPageProps) {
           </div>
 
           {/* Year dropdown */}
-          <div className="relative" ref={yearRef}>
+          <div className="relative w-full sm:w-auto" ref={yearRef}>
             <button
               onClick={() => { setYearOpen(o => !o); setCollegeOpen(false); }}
               className={`flex items-center justify-between w-full sm:w-28 px-4 py-2 text-sm border rounded-md bg-white hover:bg-gray-50 transition-all shadow-sm gap-2
@@ -180,7 +180,7 @@ export default function ListPage({ type }: ListPageProps) {
             </button>
 
             {yearOpen && (
-              <div className="absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden max-h-56 overflow-y-auto">
+              <div className="absolute z-50 mt-1 w-full sm:w-36 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden max-h-56 overflow-y-auto left-0 sm:left-auto sm:right-0">
                 <button
                   onClick={() => { setSelectedYear(''); setYearOpen(false); }}
                   className="w-full text-left px-4 py-2.5 text-sm text-gray-500 hover:bg-gray-50 border-b border-gray-100"
