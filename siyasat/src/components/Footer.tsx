@@ -34,10 +34,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex justify-between md:grid-cols-2 gap-12 relative z-10 mt-8">
+        <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-12 relative z-10 mt-8">
           <div className="space-y-6 flex flex-col justify-between">
             <div>
-              <h2 className="font-optima text-6xl font-medium tracking-wide text-[#FFD700] mb-6">
+              <h2 className="font-optima text-5xl md:text-6xl font-medium tracking-wide text-[#FFD700] mb-4 md:mb-6">
                 SIYASAT
               </h2>
               <p className="text-sm opacity-90 max-w-sm leading-relaxed">
@@ -46,8 +46,8 @@ export default function Footer() {
               </p>
             </div>
 
-            <div className="pt-4">
-              <p className="font-optima text-lg opacity-90 pt-4 inline-block">
+            <div className="pt-2 md:pt-4">
+              <p className="font-optima text-lg opacity-90 pt-2 md:pt-4 inline-block">
                 Shaping minds that shape the nation
               </p>
             </div>
@@ -56,7 +56,7 @@ export default function Footer() {
           {/* Right Section: Social Media */}
 
           <div className="md:pl-12 flex flex-col justify-between">
-            <div className="mb-12">
+            <div className="mb-8 md:mb-12">
               <h3 className="font-optima text-xl font-bold text-white mb-2 tracking-wider">
                 BROWSE
               </h3>
@@ -93,7 +93,7 @@ export default function Footer() {
                 Explore <span className="text-[#FFD700]">@upmindanao</span> on
                 Social Media
               </p>
-              <div className="flex gap-1">
+              <div className="flex flex-wrap gap-2 md:gap-1">
                 <a
                   href="https://www.facebook.com/UPMindanao/" target="_blank"
                   className="w-8 h-8 rounded-full flex items-center justify-center hover:opacity-80 transition-all"
@@ -148,7 +148,7 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="max-w-5xl mx-auto mt-6 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 text-[11px] tracking-wide opacity-90">
-        <div className="flex gap-6">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-6">
            <Link to="https://privacy.up.edu.ph/" target="_blank" rel="noopener noreferrer" 
            className="hover:underline text-[#979797]">
             Privacy
@@ -166,7 +166,7 @@ export default function Footer() {
             Copyright
           </Link>
         </div>
-        <div className="text-[#979797]">
+        <div className="text-center md:text-left text-[#979797]">
           2026 University of the Philippines Mindanao Siyasat | Into Solomon
           Azuhata
         </div>
